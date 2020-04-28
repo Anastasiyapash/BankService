@@ -1,23 +1,22 @@
-package ru.smartConsulting.pashchenko.test;
+package ru.smartconsulting.pashchenko.test;
 
-
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.*;
 
+@Getter
 @Entity
-@NoArgsConstructor
-@AllArgsConstructor
-@Setter @Getter
+@Table(name = "clients")
 public class Client {
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     Integer id;
+    @Column(name = "name")
     String name;
+    @Column(name = "adress")
     String adress;
+    @Column(name = "age")
     Integer age;
 
     public Client(String name, String adress, Integer age){
@@ -25,4 +24,6 @@ public class Client {
         this.adress = adress;
         this.age = age;
     }
+    public Client(){ }
+
 }
