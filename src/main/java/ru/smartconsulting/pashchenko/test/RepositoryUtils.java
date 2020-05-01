@@ -1,12 +1,13 @@
 package ru.smartconsulting.pashchenko.test;
 
-import lombok.Setter;
+import ru.smartconsulting.pashchenko.test.entities.Bill;
 import ru.smartconsulting.pashchenko.test.entities.Client;
 import ru.smartconsulting.pashchenko.test.entities.Transaction;
 import ru.smartconsulting.pashchenko.test.interfaces.BillRepository;
 import ru.smartconsulting.pashchenko.test.interfaces.ClientRepository;
 import ru.smartconsulting.pashchenko.test.interfaces.TransactionRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -15,7 +16,29 @@ public class RepositoryUtils {
     BillRepository billRepository;
     TransactionRepository transactionRepository;
 
-    public RepositoryUtils() { }
+    public RepositoryUtils() {
+    }
+
+    public void setRep(ClientRepository clientRepository) {
+        this.clientRepository = clientRepository;
+    }
+
+    public void setBillRep(BillRepository billRepository){
+        this.billRepository = billRepository;
+    }
+
+    public void setTransRep(TransactionRepository transactionRepository) {
+        this.transactionRepository = transactionRepository;
+    }
+
+    public List<Client> findAllByClient(){
+        List<Client> clientsList = clientRepository.findAll();
+        List<Client> allClients = new ArrayList<Client>();
+        for(Client all : clientsList) {
+            allClients.add(all);
+        }
+        return allClients;
+    }
 
     public Client findByName(String name) {
         List<Client> clientsNameList = clientRepository.findAll();
@@ -27,22 +50,54 @@ public class RepositoryUtils {
         return null;
     }
 
-    public void setRep(ClientRepository clientRepository){
-        this.clientRepository = clientRepository;
+    public List<Bill> findAllBill(){
+        List<Bill> billList = billRepository.findAll();
+        List<Bill> allBills = new ArrayList<Bill>();
+        for(Bill all : billList){
+            allBills.add(all);
+        }
+        return allBills;
     }
 
-    public Transaction findTransByIdBill(Integer idBill){
-        List<Transaction> transactionsBillList = transactionRepository.findAll();
-        for(Transaction trans : transactionsBillList){
-            if(trans.getIdBill() == idBill){
-                return trans;
+    public List<Bill> findByIdClient(Integer idClient){
+        List<Bill> billList = billRepository.findAll();
+        List<Bill> billsResult = new ArrayList<Bill>();
+        for(Bill bills : billList){
+            if(bills.getIdClient() == idClient){
+                billsResult.add(bills);
             }
         }
-        return null;
+        return billsResult;
     }
 
-    public void setTransRep(TransactionRepository transactionRepository){
-        this.transactionRepository = transactionRepository;
+    public List<Transaction> findByAllTransaction(){
+        List<Transaction> transactionList = transactionRepository.findAll();
+        List<Transaction> allTransactions = new ArrayList<Transaction>();
+        for(Transaction all : transactionList){
+            allTransactions.add(all);
+        }
+        return allTransactions;
     }
 
+    public List<Transaction> findTransByIdBill(Integer idBill) {
+        List<Transaction> transactionsBillList = transactionRepository.findAll();
+        List<Transaction> transactionsResult = new ArrayList<Transaction>();
+        for (Transaction trans : transactionsBillList) {
+            if (trans.getIdBill() == idBill) {
+                transactionsResult.add(trans);
+            }
+        }
+        return transactionsResult;
+    }
+/*
+    public List<Transaction> fidTransByIdClient(Integer idClient){
+        List<Transaction> transactionsResult = new ArrayList<Transaction>();
+        List<Bill> billsClient = findByIdClient(idClient);
+        for(Bill bill : billsClient){
+            List<Transaction> transactions = findTransByIdBill(bill.getIdBill());
+            transactionsResult.add(transactions);
+        }
+        return transactionsResult;
+    }
+*/
 }
