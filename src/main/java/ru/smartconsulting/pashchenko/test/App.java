@@ -59,11 +59,11 @@ public class App implements CommandLineRunner {
         for(Transaction trans :  transaction){
             System.out.println(trans.getIdTrans() + " " + trans.getIdBill() + " " + trans.getAmount());
         }
-/*
+
         List<Transaction> allTransUser = repositoryUtils.fidTransByIdClient(1);
         for(Transaction trans : allTransUser){
             System.out.println("ALL TRANSACTIONS USER 1: " + trans.getIdTrans());
-        }*/
+        }
     }
 
 }

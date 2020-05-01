@@ -23,7 +23,7 @@ public class RepositoryUtils {
         this.clientRepository = clientRepository;
     }
 
-    public void setBillRep(BillRepository billRepository){
+    public void setBillRep(BillRepository billRepository) {
         this.billRepository = billRepository;
     }
 
@@ -31,10 +31,10 @@ public class RepositoryUtils {
         this.transactionRepository = transactionRepository;
     }
 
-    public List<Client> findAllByClient(){
+    public List<Client> findAllByClient() {
         List<Client> clientsList = clientRepository.findAll();
         List<Client> allClients = new ArrayList<Client>();
-        for(Client all : clientsList) {
+        for (Client all : clientsList) {
             allClients.add(all);
         }
         return allClients;
@@ -50,30 +50,30 @@ public class RepositoryUtils {
         return null;
     }
 
-    public List<Bill> findAllBill(){
+    public List<Bill> findAllBill() {
         List<Bill> billList = billRepository.findAll();
         List<Bill> allBills = new ArrayList<Bill>();
-        for(Bill all : billList){
+        for (Bill all : billList) {
             allBills.add(all);
         }
         return allBills;
     }
 
-    public List<Bill> findByIdClient(Integer idClient){
+    public List<Bill> findByIdClient(Integer idClient) {
         List<Bill> billList = billRepository.findAll();
         List<Bill> billsResult = new ArrayList<Bill>();
-        for(Bill bills : billList){
-            if(bills.getIdClient() == idClient){
+        for (Bill bills : billList) {
+            if (bills.getIdClient() == idClient) {
                 billsResult.add(bills);
             }
         }
         return billsResult;
     }
 
-    public List<Transaction> findByAllTransaction(){
+    public List<Transaction> findByAllTransaction() {
         List<Transaction> transactionList = transactionRepository.findAll();
         List<Transaction> allTransactions = new ArrayList<Transaction>();
-        for(Transaction all : transactionList){
+        for (Transaction all : transactionList) {
             allTransactions.add(all);
         }
         return allTransactions;
@@ -89,15 +89,15 @@ public class RepositoryUtils {
         }
         return transactionsResult;
     }
-/*
-    public List<Transaction> fidTransByIdClient(Integer idClient){
+
+    public List<Transaction> fidTransByIdClient(Integer idClient) {
         List<Transaction> transactionsResult = new ArrayList<Transaction>();
         List<Bill> billsClient = findByIdClient(idClient);
-        for(Bill bill : billsClient){
+        for (Bill bill : billsClient) {
             List<Transaction> transactions = findTransByIdBill(bill.getIdBill());
-            transactionsResult.add(transactions);
+            transactionsResult.addAll(transactions);
         }
         return transactionsResult;
     }
-*/
+
 }
