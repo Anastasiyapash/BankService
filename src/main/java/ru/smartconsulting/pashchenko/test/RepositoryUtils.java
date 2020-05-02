@@ -1,5 +1,6 @@
 package ru.smartconsulting.pashchenko.test;
 
+import org.springframework.stereotype.Repository;
 import ru.smartconsulting.pashchenko.test.entities.Bill;
 import ru.smartconsulting.pashchenko.test.entities.Client;
 import ru.smartconsulting.pashchenko.test.entities.Transaction;
@@ -9,7 +10,6 @@ import ru.smartconsulting.pashchenko.test.interfaces.TransactionRepository;
 
 import java.util.ArrayList;
 import java.util.List;
-
 
 public class RepositoryUtils {
     ClientRepository clientRepository;
@@ -40,7 +40,7 @@ public class RepositoryUtils {
         return allClients;
     }
 
-    public Client findByName(String name) {
+    public Client findClientByName(String name) {
         List<Client> clientsNameList = clientRepository.findAll();
         for (Client clientName : clientsNameList) {
             if (clientName.getName().equals(name)) {
@@ -50,7 +50,7 @@ public class RepositoryUtils {
         return null;
     }
 
-    public List<Bill> findAllBill() {
+    public List<Bill> findAllByBill() {
         List<Bill> billList = billRepository.findAll();
         List<Bill> allBills = new ArrayList<Bill>();
         for (Bill all : billList) {
@@ -59,7 +59,7 @@ public class RepositoryUtils {
         return allBills;
     }
 
-    public List<Bill> findByIdClient(Integer idClient) {
+    public List<Bill> findBillByIdClient(Integer idClient) {
         List<Bill> billList = billRepository.findAll();
         List<Bill> billsResult = new ArrayList<Bill>();
         for (Bill bills : billList) {
@@ -70,7 +70,7 @@ public class RepositoryUtils {
         return billsResult;
     }
 
-    public List<Transaction> findByAllTransaction() {
+    public List<Transaction> findAllByTransaction() {
         List<Transaction> transactionList = transactionRepository.findAll();
         List<Transaction> allTransactions = new ArrayList<Transaction>();
         for (Transaction all : transactionList) {
@@ -92,7 +92,7 @@ public class RepositoryUtils {
 
     public List<Transaction> fidTransByIdClient(Integer idClient) {
         List<Transaction> transactionsResult = new ArrayList<Transaction>();
-        List<Bill> billsClient = findByIdClient(idClient);
+        List<Bill> billsClient = findBillByIdClient(idClient);
         for (Bill bill : billsClient) {
             List<Transaction> transactions = findTransByIdBill(bill.getIdBill());
             transactionsResult.addAll(transactions);
