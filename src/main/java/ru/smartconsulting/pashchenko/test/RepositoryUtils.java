@@ -90,7 +90,7 @@ public class RepositoryUtils {
         return transactionsResult;
     }
 
-    public List<Transaction> fidTransByIdClient(Integer idClient) {
+    public List<Transaction> findTransByIdClient(Integer idClient) {
         List<Transaction> transactionsResult = new ArrayList<Transaction>();
         List<Bill> billsClient = findBillByIdClient(idClient);
         for (Bill bill : billsClient) {
