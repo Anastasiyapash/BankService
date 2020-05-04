@@ -18,12 +18,10 @@ public class ClientController {
 
     RepositoryUtils repositoryUtils = new RepositoryUtils();
 
-    @RequestMapping("/getClient")
+    @RequestMapping("/clients")
     public List<Client> getName() {
         repositoryUtils.setRep(clientRepository);
-        List<Client> clientList = new ArrayList<Client>();
-        clientList.addAll(repositoryUtils.findAllByClient());
-        return clientList;
+        return repositoryUtils.findAllClients();
     }
 
 /*

@@ -17,11 +17,9 @@ public class TransactionController {
 
     RepositoryUtils repositoryUtils = new RepositoryUtils();
 
-    @RequestMapping("/getTrans")
+    @RequestMapping("/transactions")
     public List<Transaction> getTrans() {
-        repositoryUtils.setTransRep(transactionRepository);
-        List<Transaction> transactionList = new ArrayList<Transaction>();
-        transactionList.addAll(repositoryUtils.findAllByTransaction());
-        return transactionList;
+        repositoryUtils.setRep(transactionRepository);
+        return repositoryUtils.findAllTransactions();
     }
 }

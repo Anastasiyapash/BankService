@@ -15,11 +15,9 @@ public class BillController {
     @Autowired
     private BillRepository billRepository;
     RepositoryUtils repositoryUtils = new RepositoryUtils();
-    @RequestMapping("/getBill")
+    @RequestMapping("/bills")
     public List<Bill> getBill() {
-        repositoryUtils.setBillRep(billRepository);
-        List<Bill> billList = new ArrayList<Bill>();
-        billList.addAll(repositoryUtils.findAllByBill());
-        return billList;
+        repositoryUtils.setRep(billRepository);
+        return repositoryUtils.findAllBills();
     }
 }
