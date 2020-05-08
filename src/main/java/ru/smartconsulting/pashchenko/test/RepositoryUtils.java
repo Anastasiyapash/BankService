@@ -1,6 +1,5 @@
 package ru.smartconsulting.pashchenko.test;
 
-import org.springframework.stereotype.Repository;
 import ru.smartconsulting.pashchenko.test.entities.Bill;
 import ru.smartconsulting.pashchenko.test.entities.Client;
 import ru.smartconsulting.pashchenko.test.entities.Transaction;
@@ -16,7 +15,18 @@ public class RepositoryUtils {
     BillRepository billRepository;
     TransactionRepository transactionRepository;
 
-    public RepositoryUtils() { }
+    public RepositoryUtils() {
+    }
+
+    public Client findClientById(Integer id) {
+        List<Client> clients = clientRepository.findAll();
+        for (Client client : clients) {
+            if (client.getId().equals(id)) {
+                return client;
+            }
+        }
+        return null;
+    }
 
     public List<Client> findAllClients() {
         return clientRepository.findAll();
@@ -27,6 +37,16 @@ public class RepositoryUtils {
         for (Client clientName : clientsNameList) {
             if (clientName.getName().equals(name)) {
                 return clientName;
+            }
+        }
+        return null;
+    }
+
+    public Bill findBillById(Integer id) {
+        List<Bill> bills = billRepository.findAll();
+        for (Bill bill : bills) {
+            if (bill.getIdBill().equals(id)) {
+                return bill;
             }
         }
         return null;
@@ -45,6 +65,16 @@ public class RepositoryUtils {
             }
         }
         return billsResult;
+    }
+
+    public Transaction findTransactionsById(Integer id) {
+        List<Transaction> transactions = transactionRepository.findAll();
+        for (Transaction transaction : transactions) {
+            if (transaction.getIdTrans().equals(id)) {
+                return transaction;
+            }
+        }
+        return null;
     }
 
     public List<Transaction> findAllTransactions() {

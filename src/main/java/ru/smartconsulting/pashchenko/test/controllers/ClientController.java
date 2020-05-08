@@ -1,13 +1,11 @@
 package ru.smartconsulting.pashchenko.test.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.smartconsulting.pashchenko.test.RepositoryUtils;
 import ru.smartconsulting.pashchenko.test.entities.Client;
 import ru.smartconsulting.pashchenko.test.interfaces.ClientRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -18,19 +16,20 @@ public class ClientController {
 
     RepositoryUtils repositoryUtils = new RepositoryUtils();
 
-    @RequestMapping("/clients")
-    public List<Client> getName() {
+    @GetMapping("/client/{id}")
+    public Client getById(@PathVariable("id") Integer id) {
+        repositoryUtils.setRep(clientRepository);
+        return repositoryUtils.findClientById(id);
+    }
+
+    @GetMapping("/clients")
+    public List<Client> getClients() {
         repositoryUtils.setRep(clientRepository);
         return repositoryUtils.findAllClients();
     }
 
-/*
-    @RequestMapping("/getByNameClient{name}")
-    public List<Client> getByName(){
-        String name = "Ivan";
-        repositoryUtils.setRep(clientRepository);
-        List<Client> clientList = new ArrayList<Client>();
-        clientList.addAll(repositoryUtils.findByName(name));
-    }*/
-
+    @GetMapping("/clients/name/{name}")
+    public Client getByName(@PathVariable("name") String name) {
+        return repositoryUtils.findClientByName(name);
+    }
 }
