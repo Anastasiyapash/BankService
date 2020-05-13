@@ -28,8 +28,15 @@ public class ClientController {
         return repositoryUtils.findAllClients();
     }
 
-    @GetMapping("/clients/name/{name}")
+    @GetMapping("/client/name/{name}")
     public Client getByName(@PathVariable("name") String name) {
         return repositoryUtils.findClientByName(name);
+    }
+
+    @GetMapping("/clients/new/{name}/{address}/{age}")
+    public Client newClient(@PathVariable("name") String name,
+                               @PathVariable("address") String address, @PathVariable("age") Integer age) {
+        repositoryUtils.setRep(clientRepository);
+        return repositoryUtils.newClient(name, address, age);
     }
 }

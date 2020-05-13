@@ -8,6 +8,8 @@ import ru.smartconsulting.pashchenko.test.RepositoryUtils;
 import ru.smartconsulting.pashchenko.test.entities.Bill;
 import ru.smartconsulting.pashchenko.test.entities.Client;
 import ru.smartconsulting.pashchenko.test.interfaces.BillRepository;
+import ru.smartconsulting.pashchenko.test.interfaces.ClientRepository;
+import ru.smartconsulting.pashchenko.test.interfaces.TransactionRepository;
 
 import java.util.List;
 
@@ -15,6 +17,10 @@ import java.util.List;
 public class BillController {
     @Autowired
     private BillRepository billRepository;
+    @Autowired
+    private ClientRepository clientRepository;
+    @Autowired
+    private TransactionRepository transactionRepository;
     RepositoryUtils repositoryUtils = new RepositoryUtils();
 
     @GetMapping("/bills/{id}")
@@ -33,5 +39,12 @@ public class BillController {
     public List<Bill> getByIdClient(@PathVariable("idClient") Integer idClient) {
         repositoryUtils.setRep(billRepository);
         return repositoryUtils.findBillsByIdClient(idClient);
+    }
+
+    @GetMapping("/bills/new/{idClient}/{countMoney}")
+    public Bill newBill(@PathVariable("idClient") Integer idClient,
+                           @PathVariable("countMoney") Integer countMoney){
+        repositoryUtils.setRep(billRepository);
+        return repositoryUtils.newBill(idClient, countMoney);
     }
 }

@@ -16,20 +16,20 @@ public class Client {
     @Column(name = "name")
     String name;
     @Column(name = "adress")
-    String adress;
+    String address;
     @Column(name = "age")
     Integer age;
 
-    public Client(Integer id, String name, String adress, Integer age){
+    public Client(Integer id, String name, String address, Integer age){
         this.id = id;
         this.name = name;
-        this.adress = adress;
+        this.address = address;
         this.age = age;
     }
 
-    public Client(String name, String adress, Integer age){
+    public Client(String name, String address, Integer age){
         this.name = name;
-        this.adress = adress;
+        this.address = address;
         this.age = age;
     }
 

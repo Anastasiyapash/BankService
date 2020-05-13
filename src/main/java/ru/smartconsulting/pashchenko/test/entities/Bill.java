@@ -11,7 +11,7 @@ public class Bill {
     @Id
     @Column(name = "id_bill")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    Integer idBill;
+    Integer id;
 
     @Column(name = "id_client")
     Integer idClient;
@@ -19,8 +19,8 @@ public class Bill {
     @Column(name = "count_money")
     Integer countMoney;
 
-    public Bill(Integer idBill, Integer idClient, Integer countMoney){
-        this.idBill = idBill;
+    public Bill(Integer id, Integer idClient, Integer countMoney){
+        this.id = id;
         this.idClient = idClient;
         this.countMoney = countMoney;
     }

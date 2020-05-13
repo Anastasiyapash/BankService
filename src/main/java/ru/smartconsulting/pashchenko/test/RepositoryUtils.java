@@ -18,6 +18,12 @@ public class RepositoryUtils {
     public RepositoryUtils() {
     }
 
+    public Client newClient(String name, String address, Integer age) {
+        Client client = new Client(name, address, age);
+        clientRepository.saveAndFlush(client);
+        return client;
+    }
+
     public Client findClientById(Integer id) {
         List<Client> clients = clientRepository.findAll();
         for (Client client : clients) {
@@ -42,10 +48,16 @@ public class RepositoryUtils {
         return null;
     }
 
+    public Bill newBill(Integer idClient, Integer countMoney){
+        Bill bill = new Bill(idClient, countMoney);
+        billRepository.saveAndFlush(bill);
+        return bill;
+    }
+
     public Bill findBillById(Integer id) {
         List<Bill> bills = billRepository.findAll();
         for (Bill bill : bills) {
-            if (bill.getIdBill().equals(id)) {
+            if (bill.getId().equals(id)) {
                 return bill;
             }
         }
@@ -67,10 +79,17 @@ public class RepositoryUtils {
         return billsResult;
     }
 
+    public Transaction newTransaction(Integer idBill, Integer amount){
+        Transaction transaction = new Transaction(idBill, amount);
+        transactionRepository.saveAndFlush(transaction);
+        return transaction;
+    }
+
+
     public Transaction findTransactionsById(Integer id) {
         List<Transaction> transactions = transactionRepository.findAll();
         for (Transaction transaction : transactions) {
-            if (transaction.getIdTrans().equals(id)) {
+            if (transaction.getId().equals(id)) {
                 return transaction;
             }
         }
@@ -96,7 +115,7 @@ public class RepositoryUtils {
         List<Transaction> transactionsResult = new ArrayList<Transaction>();
         List<Bill> billsClient = findBillsByIdClient(idClient);
         for (Bill bill : billsClient) {
-            List<Transaction> transactions = findTransactionsByIdBill(bill.getIdBill());
+            List<Transaction> transactions = findTransactionsByIdBill(bill.getId());
             transactionsResult.addAll(transactions);
         }
         return transactionsResult;

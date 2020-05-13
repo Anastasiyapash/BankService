@@ -50,4 +50,11 @@ public class TransactionController {
         repositoryUtils.setRep(transactionRepository);
         return repositoryUtils.findTransactionsByIdClient(idClient);
     }
+
+    @GetMapping("/transactions/new/{idBill}/{amount}")
+    public Transaction getNewTransaction(@PathVariable("idBill") Integer idBill,
+                                      @PathVariable("amount") Integer amount){
+        repositoryUtils.setRep(transactionRepository);
+        return repositoryUtils.newTransaction(idBill, amount);
+    }
 }
