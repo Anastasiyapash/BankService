@@ -30,11 +30,6 @@ public class ClientController {
         return repositoryUtils.findAllClients();
     }
 
-    @GetMapping("/client/name/{name}")
-    public Client getByName(@PathVariable("name") String name) {
-        return repositoryUtils.findClientByName(name);
-    }
-
     @PostMapping("/clients")
     public Client newClient(@RequestBody Map<String, String> body) {
         repositoryUtils.setRep(clientRepository);
@@ -44,4 +39,8 @@ public class ClientController {
         return repositoryUtils.newClient(name, address, age);
     }
 
+    @GetMapping("/client/name/{name}")
+    public Client getByName(@PathVariable("name") String name) {
+        return repositoryUtils.findClientByName(name);
+    }
 }

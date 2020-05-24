@@ -9,6 +9,7 @@ import ru.smartconsulting.pashchenko.test.interfaces.BillRepository;
 import ru.smartconsulting.pashchenko.test.interfaces.ClientRepository;
 import ru.smartconsulting.pashchenko.test.interfaces.TransactionRepository;
 
+import javax.validation.constraints.Null;
 import java.util.List;
 import java.util.Map;
 
@@ -34,17 +35,21 @@ public class BillController {
         return repositoryUtils.findAllBills();
     }
 
+    @PostMapping("/bills")
+    public Bill newBill(@RequestBody Map<String, String> body) {
+        repositoryUtils.setRep(billRepository);
+        Integer idClient = Integer.parseInt(body.get("idClient"));
+        if (repositoryUtils.findClientById(idClient) != null) {
+            Integer countMoney = Integer.parseInt(body.get("countMoney"));
+            return repositoryUtils.newBill(idClient, countMoney);
+        } else {
+            return null;
+        }
+    }
+
     @GetMapping("/bills/client/{idClient}")
     public List<Bill> getByIdClient(@PathVariable("idClient") Integer idClient) {
         repositoryUtils.setRep(billRepository);
         return repositoryUtils.findBillsByIdClient(idClient);
-    }
-
-    @PostMapping("/bills")
-    public Bill newBill(@RequestBody Map<String, String> body) {
-        repositoryUtils.setRep(clientRepository);
-        Integer idClient = Integer.parseInt(body.get("idClient"));
-        Integer countMoney = Integer.parseInt(body.get("countMoney"));
-        return repositoryUtils.newBill(idClient, countMoney);
     }
 }

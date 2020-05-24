@@ -35,6 +35,18 @@ public class TransactionController {
         return repositoryUtils.findAllTransactions();
     }
 
+    @PostMapping("/transactions")
+    public Transaction newTransaction(@RequestBody Map<String, String> body) {
+        repositoryUtils.setRep(transactionRepository);
+        Integer idBill = Integer.parseInt(body.get("idBill"));
+        if (!repositoryUtils.findTransactionsByIdBill(idBill).isEmpty()) {
+            Integer amount = Integer.parseInt(body.get("amount"));
+            return repositoryUtils.newTransaction(idBill, amount);
+        } else {
+            return null;
+        }
+    }
+
     @GetMapping("/transactions/bill/{idBill}")
     public List<Transaction> getByIdBill(@PathVariable("idBill") Integer idBill) {
         repositoryUtils.setRep(billRepository);
@@ -49,13 +61,4 @@ public class TransactionController {
         repositoryUtils.setRep(transactionRepository);
         return repositoryUtils.findTransactionsByIdClient(idClient);
     }
-
-   @PostMapping("/transactions")
-   public Transaction newTransaction(@RequestBody Map<String, String> body) {
-       repositoryUtils.setRep(clientRepository);
-       Integer idBill = Integer.parseInt(body.get("idBill"));
-       Integer amount = Integer.parseInt(body.get("amount"));
-       return repositoryUtils.newTransaction(idBill, amount);
-   }
-
 }
