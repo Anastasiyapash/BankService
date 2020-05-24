@@ -4,7 +4,6 @@ import lombok.Getter;
 
 import javax.persistence.*;
 
-@Getter
 @Entity
 @Table(name = "bills")
 public class Bill {
@@ -32,4 +31,11 @@ public class Bill {
 
     public Bill(){}
 
+    public Integer getId(){
+        return id;
+    }
+
+    public Integer getIdClient(){
+        return idClient;
+    }
 }

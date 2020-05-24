@@ -5,7 +5,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
-@Getter @Setter
 @Entity
 @Table(name = "clients")
 public class Client {
@@ -34,5 +33,13 @@ public class Client {
     }
 
     public Client(){ }
+
+    public Integer getId(){
+        return id;
+    }
+
+    public String getName(){
+        return name;
+    }
 
 }

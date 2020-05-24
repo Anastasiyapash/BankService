@@ -1,11 +1,9 @@
 package ru.smartconsulting.pashchenko.test.entities;
 
 
-import lombok.Getter;
 
 import javax.persistence.*;
 
-@Getter
 @Entity
 @Table(name = "transactions")
 public class Transaction {
@@ -32,4 +30,13 @@ public class Transaction {
     }
 
     public Transaction(){ }
+
+    public Integer getId(){
+        return id;
+    }
+
+    public Integer getIdBill(){
+        return idBill;
+    }
+
 }
