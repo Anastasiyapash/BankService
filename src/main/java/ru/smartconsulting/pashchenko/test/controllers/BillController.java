@@ -1,9 +1,7 @@
 package ru.smartconsulting.pashchenko.test.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.smartconsulting.pashchenko.test.RepositoryUtils;
 import ru.smartconsulting.pashchenko.test.entities.Bill;
 import ru.smartconsulting.pashchenko.test.entities.Client;
@@ -12,6 +10,7 @@ import ru.smartconsulting.pashchenko.test.interfaces.ClientRepository;
 import ru.smartconsulting.pashchenko.test.interfaces.TransactionRepository;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class BillController {
@@ -41,10 +40,11 @@ public class BillController {
         return repositoryUtils.findBillsByIdClient(idClient);
     }
 
-    @GetMapping("/bills/new/{idClient}/{countMoney}")
-    public Bill newBill(@PathVariable("idClient") Integer idClient,
-                           @PathVariable("countMoney") Integer countMoney){
-        repositoryUtils.setRep(billRepository);
+    @PostMapping("/bills")
+    public Bill newBill(@RequestBody Map<String, String> body) {
+        repositoryUtils.setRep(clientRepository);
+        Integer idClient = Integer.parseInt(body.get("idClient"));
+        Integer countMoney = Integer.parseInt(body.get("countMoney"));
         return repositoryUtils.newBill(idClient, countMoney);
     }
 }

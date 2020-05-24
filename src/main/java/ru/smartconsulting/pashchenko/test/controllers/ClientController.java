@@ -6,7 +6,9 @@ import ru.smartconsulting.pashchenko.test.RepositoryUtils;
 import ru.smartconsulting.pashchenko.test.entities.Client;
 import ru.smartconsulting.pashchenko.test.interfaces.ClientRepository;
 
+import java.security.SecureRandom;
 import java.util.List;
+import java.util.Map;
 
 
 @RestController
@@ -33,10 +35,13 @@ public class ClientController {
         return repositoryUtils.findClientByName(name);
     }
 
-    @GetMapping("/clients/new/{name}/{address}/{age}")
-    public Client newClient(@PathVariable("name") String name,
-                               @PathVariable("address") String address, @PathVariable("age") Integer age) {
+    @PostMapping("/clients")
+    public Client newClient(@RequestBody Map<String, String> body) {
         repositoryUtils.setRep(clientRepository);
+        String name = body.get("name");
+        String address = body.get("address");
+        Integer age = Integer.parseInt(body.get("age"));
         return repositoryUtils.newClient(name, address, age);
     }
+
 }
